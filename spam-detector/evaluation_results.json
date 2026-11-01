@@ -1,0 +1,170 @@
+{
+  "format_version": 7,
+  "dataset_name": "SMS Spam Collection",
+  "dataset_type": "full",
+  "dataset_file": "SMSSpamCollection",
+  "dataset_source": "https://archive.ics.uci.edu/dataset/228/sms+spam+collection",
+  "source_samples": 5574,
+  "duplicates_removed": 414,
+  "total_samples": 5160,
+  "source_class_counts": {
+    "ham": 4827,
+    "spam": 747
+  },
+  "class_counts": {
+    "ham": 4518,
+    "spam": 642
+  },
+  "training_samples": 4128,
+  "testing_samples": 1032,
+  "training_class_counts": {
+    "ham": 3614,
+    "spam": 514
+  },
+  "testing_class_counts": {
+    "ham": 904,
+    "spam": 128
+  },
+  "random_state": 42,
+  "test_size": 0.2,
+  "cv_folds": 5,
+  "software_versions": {
+    "python": "3.14.6",
+    "scikit_learn": "1.9.0",
+    "pandas": "3.0.3",
+    "joblib": "1.5.3"
+  },
+  "positive_class": "spam",
+  "class_labels": [
+    "ham",
+    "spam"
+  ],
+  "text_preprocessing": {
+    "vectorizer": "Word and character TF-IDF",
+    "lowercase": true,
+    "stop_words": null,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "character_ngram_range": [
+      3,
+      5
+    ],
+    "character_max_features": 200000
+  },
+  "model_name": "Linear SVM",
+  "spam_probability_calibrated": true,
+  "probability_calibration": "Sigmoid calibration with CalibratedClassifierCV",
+  "spam_decision": {
+    "threshold": 0.10549493075754297,
+    "cross_validation_precision": 0.8486394557823129,
+    "cross_validation_recall": 0.9708171206225681,
+    "target_recall": 0.97,
+    "threshold_basis": "calibrated probability"
+  },
+  "selection_rule": "Highest mean Spam F1 defines the best score; candidates within one standard error on stratified training-only cross-validation are treated as statistically comparable, then highest Spam recall is selected. The held-out test split is never used for selection.",
+  "data_leakage_checks": {
+    "duplicate_messages_removed_before_split": true,
+    "train_test_message_overlap": 0,
+    "tfidf_is_inside_pipeline": true,
+    "cross_validation_uses_training_partition_only": true,
+    "threshold_uses_nested_training_only_cross_validation": true,
+    "test_data_used_for_model_selection": false
+  },
+  "evaluation": {
+    "accuracy": 0.9748062015503876,
+    "precision": 0.8445945945945946,
+    "recall": 0.9765625,
+    "f1": 0.9057971014492754,
+    "confusion_matrix": [
+      [
+        881,
+        23
+      ],
+      [
+        3,
+        125
+      ]
+    ],
+    "classification_report": "              precision    recall  f1-score   support\n\n         Ham       1.00      0.97      0.99       904\n        Spam       0.84      0.98      0.91       128\n\n    accuracy                           0.97      1032\n   macro avg       0.92      0.98      0.95      1032\nweighted avg       0.98      0.97      0.98      1032\n"
+  },
+  "comparison": {
+    "Logistic Regression": {
+      "cross_validation_f1": 0.9416757171072394,
+      "cross_validation_f1_standard_error": 0.010355858547500131,
+      "cross_validation_recall": 0.8988958690272225,
+      "best_parameters": {
+        "classifier__C": 10.0
+      },
+      "metrics": {
+        "accuracy": 0.9844961240310077,
+        "precision": 0.9827586206896551,
+        "recall": 0.890625,
+        "f1": 0.9344262295081968
+      },
+      "confusion_matrix": [
+        [
+          902,
+          2
+        ],
+        [
+          14,
+          114
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n         Ham       0.98      1.00      0.99       904\n        Spam       0.98      0.89      0.93       128\n\n    accuracy                           0.98      1032\n   macro avg       0.98      0.94      0.96      1032\nweighted avg       0.98      0.98      0.98      1032\n"
+    },
+    "Multinomial Naive Bayes": {
+      "cross_validation_f1": 0.9547268653642105,
+      "cross_validation_f1_standard_error": 0.006268609785047603,
+      "cross_validation_recall": 0.92608033504664,
+      "best_parameters": {
+        "classifier__alpha": 0.1
+      },
+      "metrics": {
+        "accuracy": 0.9883720930232558,
+        "precision": 0.967741935483871,
+        "recall": 0.9375,
+        "f1": 0.9523809523809523
+      },
+      "confusion_matrix": [
+        [
+          900,
+          4
+        ],
+        [
+          8,
+          120
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n         Ham       0.99      1.00      0.99       904\n        Spam       0.97      0.94      0.95       128\n\n    accuracy                           0.99      1032\n   macro avg       0.98      0.97      0.97      1032\nweighted avg       0.99      0.99      0.99      1032\n"
+    },
+    "Linear SVM": {
+      "cross_validation_f1": 0.9591794528034342,
+      "cross_validation_f1_standard_error": 0.010490468792402945,
+      "cross_validation_recall": 0.9435941366837997,
+      "best_parameters": {
+        "classifier__estimator__C": 10.0
+      },
+      "metrics": {
+        "accuracy": 0.9748062015503876,
+        "precision": 0.8445945945945946,
+        "recall": 0.9765625,
+        "f1": 0.9057971014492754
+      },
+      "confusion_matrix": [
+        [
+          881,
+          23
+        ],
+        [
+          3,
+          125
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n         Ham       1.00      0.97      0.99       904\n        Spam       0.84      0.98      0.91       128\n\n    accuracy                           0.97      1032\n   macro avg       0.92      0.98      0.95      1032\nweighted avg       0.98      0.97      0.98      1032\n",
+      "spam_decision_threshold": 0.10549493075754297
+    }
+  }
+}

@@ -1,0 +1,45 @@
+Representative message diagnostic (small, manually labeled set)
+Model artifact: spam_model.joblib
+Training dataset: SMS Spam Collection (full)
+Model: Linear SVM
+Diagnostic samples: 20
+Positive class: Spam
+
+Metrics on this diagnostic set (not the training hold-out set):
+Accuracy: 0.7000
+Precision (Spam): 0.5714
+Recall (Spam): 1.0000
+F1-score (Spam): 0.7273
+
+Confusion matrix (rows = actual [Ham, Spam], columns = predicted [Ham, Spam]):
+[[6, 6], [0, 8]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+         Ham       1.00      0.50      0.67        12
+        Spam       0.57      1.00      0.73         8
+
+    accuracy                           0.70        20
+   macro avg       0.79      0.75      0.70        20
+weighted avg       0.83      0.70      0.69        20
+
+Candidate comparison (all fitted on the same corpus training split):
+Model | CV Spam F1 (training only) | Corpus hold-out accuracy | Spam precision | Spam recall | Spam F1 | Representative accuracy | Representative Spam F1
+Logistic Regression | 0.9417 | 0.9845 | 0.9828 | 0.8906 | 0.9344 | 0.8000 | 0.6667
+Multinomial Naive Bayes | 0.9547 | 0.9884 | 0.9677 | 0.9375 | 0.9524 | 0.9000 | 0.8889
+Linear SVM | 0.9592 | 0.9748 | 0.8446 | 0.9766 | 0.9058 | 0.7000 | 0.7273
+
+This manually labeled diagnostic set is not used for cross-validation, model selection, or the corpus hold-out evaluation.
+
+False positives (6):
+- Reminder: our project meeting is at 3 pm in room 204. Please bring your notes.
+- Your order has been delivered and left with the front desk.
+- Your card payment of $18.40 at Green Cafe was approved. If this was not you, call the number on your card.
+- Your monthly statement is ready in the banking app. No action is needed.
+- Train update: the 6:20 service is delayed by ten minutes. Sorry for the inconvenience.
+- Payment received for your internet bill. Your next bill is due on the 15th.
+
+False negatives (0):
+
+Interpretation: this small hand-labeled diagnostic set is useful for targeted checks, but is not a representative population estimate or a substitute for evaluation on the full SMS Spam Collection.

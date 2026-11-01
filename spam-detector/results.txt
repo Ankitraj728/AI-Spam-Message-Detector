@@ -1,0 +1,80 @@
+AI Spam Message Detector - Reproducible Evaluation
+Dataset: SMS Spam Collection
+Dataset type: FULL
+Dataset file: SMSSpamCollection
+Dataset source: https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+Source dataset rows: 5574
+Source class counts before deduplication: {'ham': 4827, 'spam': 747}
+Duplicate messages removed: 414
+Usable unique messages: 5160
+Unique class counts: {'ham': 4518, 'spam': 642}
+Unique ham messages: 4518
+Unique spam messages: 642
+Python version: 3.14.6
+scikit-learn version: 1.9.0
+Training samples: 4128
+Testing samples: 1032
+Cross-validation folds (training only): 5
+Random seed: 42
+Selected model: Linear SVM
+Spam decision threshold (calibrated probability): 0.1055
+Training CV Spam recall at threshold: 0.9708
+Selection rule: Highest mean Spam F1 defines the best score; candidates within one standard error on stratified training-only cross-validation are treated as statistically comparable, then highest Spam recall is selected. The held-out test split is never used for selection.
+Positive class: Spam
+
+Model selection (stratified cross-validation on training data only):
+- Logistic Regression: mean CV Spam F1=0.9417; mean CV Spam recall=0.8989; best parameters={'classifier__C': 10.0}
+- Multinomial Naive Bayes: mean CV Spam F1=0.9547; mean CV Spam recall=0.9261; best parameters={'classifier__alpha': 0.1}
+- Linear SVM: mean CV Spam F1=0.9592; mean CV Spam recall=0.9436; best parameters={'classifier__estimator__C': 10.0}
+Selection rule: highest CV Spam F1 defines the best score; models within one standard error are treated as statistically comparable, and the one with the highest training-only CV Spam recall is selected.
+
+Selected model metrics (computed from the held-out test split):
+The selected model uses the recall-oriented threshold tuned with nested training-only out-of-fold model scores; alternative-model test metrics use each classifier's default prediction threshold.
+Accuracy: 0.9748
+Precision (Spam): 0.8446
+Recall (Spam): 0.9766
+F1-score (Spam): 0.9058
+
+Confusion matrix (rows = actual [Ham, Spam], columns = predicted [Ham, Spam]):
+[[881, 23], [3, 125]]
+False positives (legitimate messages labeled Spam): 23.
+False negatives (Spam messages labeled legitimate): 3.
+
+Model comparison on the same held-out test split (not used for selection):
+CV metrics are out-of-fold results within the training partition. No in-sample training score is presented as a generalization estimate.
+- Logistic Regression: CV Spam F1=0.9417, CV Spam recall=0.8989, spam cutoff=default, accuracy=0.9845, precision=0.9828, recall=0.8906, F1=0.9344
+- Multinomial Naive Bayes: CV Spam F1=0.9547, CV Spam recall=0.9261, spam cutoff=default, accuracy=0.9884, precision=0.9677, recall=0.9375, F1=0.9524
+- Linear SVM: CV Spam F1=0.9592, CV Spam recall=0.9436, spam cutoff=0.10549493075754297, accuracy=0.9748, precision=0.8446, recall=0.9766, F1=0.9058
+
+Classification report on held-out test data - Logistic Regression:
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       904
+        Spam       0.98      0.89      0.93       128
+
+    accuracy                           0.98      1032
+   macro avg       0.98      0.94      0.96      1032
+weighted avg       0.98      0.98      0.98      1032
+
+
+Classification report on held-out test data - Multinomial Naive Bayes:
+              precision    recall  f1-score   support
+
+         Ham       0.99      1.00      0.99       904
+        Spam       0.97      0.94      0.95       128
+
+    accuracy                           0.99      1032
+   macro avg       0.98      0.97      0.97      1032
+weighted avg       0.99      0.99      0.99      1032
+
+
+Classification report on held-out test data - Linear SVM:
+              precision    recall  f1-score   support
+
+         Ham       1.00      0.97      0.99       904
+        Spam       0.84      0.98      0.91       128
+
+    accuracy                           0.97      1032
+   macro avg       0.92      0.98      0.95      1032
+weighted avg       0.98      0.97      0.98      1032
+
